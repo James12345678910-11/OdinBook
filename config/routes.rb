@@ -25,5 +25,6 @@ end
 resources :likes, only: %i[create destroy]
 resources :comments, only: %i[create update destroy]
 
+mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
 end
