@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :set_suggested_users
+  before_action :set_suggested_users, if: :user_signed_in?
   allow_browser versions: :modern
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
 
-  def suggested_users
+  def set_suggested_users
     @suggested_users = []
     return unless user_signed_in?
 

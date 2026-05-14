@@ -20,16 +20,24 @@ class User < ApplicationRecord
   has_many :following, through: :following_relationships, source: :followed
 
    def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.avatar_url = auth.info.image
-    end
+
+  user = find_by(email: auth.info.email)
+
+  
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0, 20]
+    user.name = auth.info.name
+    user.avatar_url = auth.info.image
   end
+end
+
 
    def profile_picture(size: 200)
     avatar_url.presence || gravatar_url(size: size)
   end
+
+  
 
   private
 
@@ -41,4 +49,5 @@ class User < ApplicationRecord
     email_hash = Digest::MD5.hexdigest(email.downcase)
     "https://www.gravatar.com/avatar/#{email_hash}?s=#{size}&d=identicon"
   end
+
 end

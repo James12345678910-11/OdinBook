@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+gem "dotenv-rails", groups: [:development, :test]
+
+
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.3"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -67,7 +71,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
+
 gem "devise", "~> 5.0"
 
 gem "omniauth", "~> 2.1"
 gem "omniauth-rails_csrf_protection"
+gem "omniauth-google-oauth2"

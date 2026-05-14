@@ -1,0 +1,17 @@
+<h1>"Welcome, <%= @user.name %>!"</h1>
+
+<ul>
+  <li>
+    <%= link_to 'My Posts', posts_path %>
+  </li>
+  <li>
+    <%= link_to 'New Post', new_post_path %>
+  </li>
+</ul>
+
+<%= @posts.each do |post| %>
+    <div>
+        <h3><%= post.user.name %></h3>
+        <p><%= post.content %></p>
+    </div>
+<% end %>

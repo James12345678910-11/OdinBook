@@ -14,4 +14,10 @@ class UsersController < ApplicationController
 
         @outgoing_requests = current_user.following_relationships.includes(:followed).where(status: 'pending')
     end
+
+    private
+
+    def set_user
+        @user = User.find(params[:id])
+    end
 end
