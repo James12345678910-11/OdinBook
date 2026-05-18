@@ -1,0 +1,30 @@
+<h1>My Posts</h1>
+
+<%= link_to 'New Post', new_post_path %>
+
+<ul>
+  <% @suggested_users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_path(user) %>
+    </li>
+  <% end %>
+
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post) do %>
+      <li>
+        <h3><%= post.user&.name %></h3>
+        <p><%= post.content %></p>
+      </li>
+    <% end %>
+
+    <% if post.user == current_user %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Delete',
+          post_path(post),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  <% end %>
+</ul>
+
+  

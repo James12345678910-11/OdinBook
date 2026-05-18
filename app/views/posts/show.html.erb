@@ -1,0 +1,9 @@
+<h1>Post</h1>
+
+<h3><%= @post.user&.name %></h3>
+<p><%= @post.content %></p>
+
+<%= link_to 'Edit', edit_post_path(@post) if @post.user == current_user %>
+<%= link_to 'Delete', post_path(@post), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } if @post.user == current_user %>
+
+<%= link_to 'Back', posts_path %>

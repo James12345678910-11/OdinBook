@@ -1,0 +1,26 @@
+<h1>Edit Post</h1>
+
+<%= form_with(model: @post, data: { turbo: false }) do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>  <!-- ← Rails auto-fills existing content! -->
+  </div>
+
+  <div>
+    <%= form.submit "Update Post" %>
+  </div>
+
+  <div>
+    <%= form.submit "Delete Post", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, formaction: post_path(@post), formmethod: :delete %>
+  </div>
+<% end %>
+
+<%= link_to "Cancel", posts_path %>

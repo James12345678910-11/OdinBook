@@ -17,8 +17,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    resources :posts
+  end
+
   resources :follows, only: %i[create destroy]
-  resources :posts, only: %i[index new create destroy] do
+  resources :posts, only: %i[index new show create destroy edit update] do
   member do
     post :repost
   end

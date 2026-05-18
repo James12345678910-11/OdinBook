@@ -17,9 +17,10 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 500 }
   
 
-  ALLOWED_IMAGE_TYPES = [ "image/jpeg", "image/png", "image/webp" ].freeze
+  ALLOWED_IMAGE_TYPES = [ "image/jpeg", "image/png", "image/webp", "image/gif" ].freeze
   MAX_IMAGE_SIZE = 5.megabytes
   MAX_IMAGE_COUNT = 4
+  
 
   def set_root_post
   return unless original_post
@@ -42,8 +43,8 @@ class Post < ApplicationRecord
   private
 
   def image_count_limit
-    if images.attached? && images.count > MAX_PHOTO_COUNT
-      errors.add(:images, "You can attach up to #{MAX_PHOTO_COUNT} images")
+    if images.attached? && images.count > MAX_IMAGE_COUNT
+      errors.add(:images, "You can attach up to #{MAX_IMAGE_COUNT} images")
     end
   end
 
@@ -60,14 +61,14 @@ class Post < ApplicationRecord
       next if img.byte_size <= MAX_IMAGE_SIZE
 
       errors.add(:images, "size must be less than 5MB")
-      end
     end
   end
+  
 
-def prevent_repost_of_repost
-  return unless self.original_post
-  return unless self.original_post.original_post
+  def prevent_repost_of_repost
+    return unless self.original_post
+    return unless self.original_post.original_post
 
-  errors.add(:base, "Cannot repost a repost")
-end
+    errors.add(:base, "Cannot repost a repost")
+  end
 end
