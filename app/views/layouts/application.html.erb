@@ -1,5 +1,29 @@
 <!DOCTYPE html>
 <html>
+<nav class="top-nav">
+  <div class="nav-left">
+    <%= link_to "OdinBook", root_path, class: "logo" %>
+  </div>
+
+  <div class="nav-right">
+    <%= link_to "Discover", users_path, class: "nav-link" %>
+
+    <% if user_signed_in? %>
+      <%= link_to "Profile",
+                  user_path(current_user),
+                  class: "nav-link" %>
+
+      <%= button_to "Log Out",
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: "nav-button logout-btn" %>
+    <% else %>
+      <%= link_to "Sign In",
+                  new_user_session_path,
+                  class: "nav-link" %>
+    <% end %>
+  </div>
+</nav>
   <head>
     <title><%= content_for(:title) || "Odin Book" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,6 +48,12 @@
   </head>
 
   <body>
+    <% if notice %>
+      <div class="flash-notice"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="flash-alert"><%= alert %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email
 
+  has_one_attached :avatar
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy

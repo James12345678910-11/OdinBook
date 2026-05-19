@@ -1,4 +1,4 @@
-<h1>"Welcome, <%= @user.name %>!"</h1>
+<h1>Welcome, <%= current_user.name %>!</h1>
 
 <ul>
   <li>
@@ -9,7 +9,7 @@
   </li>
 </ul>
 
-<%= @posts.each do |post| %>
+<% @posts.each do |post| %>
     <div>
         <h3><%= post.user.name %></h3>
         <p><%= post.content %></p>

@@ -1,10 +1,18 @@
-<h1><%= @user.name %></h1>
+<h1>My Profile</h1>
+<div class="post-user">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, width: 40, height: 40 %>
+  <% end %>
+
+  <span><%= @user.name %></span>
+</div>
+<%= button_to 'follow requests', follow_requests_user_path(@user), class: 'btn btn-secondary' %>
 <ul>
   <li>
-    <%= link_to 'My Posts', posts_path %>
+    <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
   </li>
   <li>
-    <%= link_to 'New Post', new_post_path %>
+    <%= link_to 'My Posts', posts_path, class: 'btn btn-secondary' %>
   </li>
 </ul>
 <% @posts.each do |post| %>

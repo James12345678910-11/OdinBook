@@ -19,7 +19,19 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :posts
+    member do
+      get :follow_requests, to: "users#follow_requests"
+    end
   end
+
+
+  patch "follows/:id/accept",
+        to: "follows#accept",
+        as: :accept_follow
+
+  patch "follows/:id/reject",
+        to: "follows#reject",
+        as: :reject_follow
 
   resources :follows, only: %i[create destroy]
   resources :posts, only: %i[index new show create destroy edit update] do

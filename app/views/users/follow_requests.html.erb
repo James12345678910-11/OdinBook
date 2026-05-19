@@ -1,0 +1,10 @@
+<h1>Follow Requests</h1>
+<% @follow_requests.each do |request| %>
+  <div class="follow-request-card">
+    <h3><%= request.follower.name %></h3>
+    <div class="follow-request-actions">
+      <%= button_to 'Accept', accept_follow_request_user_path(request), method: :post, class: "btn btn-success" %>
+      <%= button_to 'Reject', reject_follow_request_user_path(request), method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
+<% end %>
